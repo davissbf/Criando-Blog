@@ -17,7 +17,7 @@ body{
   background: none;
   outline: none;
   border-color: #bdba07;
-  border-radius: 3;
+  border-radius: 0;
   transition: 0.5s;
   font-weight: bold;
   color: #bdba07;
@@ -30,7 +30,7 @@ body{
   background: #b90606;
   outline: none;
   border-color: #b90606;
-  border-radius: 3;
+  border-radius: 0;
   transition: 0.5s;
   color: white;
 }
