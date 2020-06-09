@@ -1,0 +1,57 @@
+<%- include('../../partials/header.ejs') %>
+<body>
+  <%- include('../../partials/navbar.ejs') %>
+  <div class="container">
+    <hr>
+    <div class="card"> 
+      <div class="card-header">
+        <h1>Editar artigo</h1>
+      </div>
+      <div class="card-body">
+        <form method="POST" action="/articles/save">
+          <input type="hidden" value="<%= article.id %>" name="id">
+          <input class="form-control" type="text" name="title" placeholder="Defina o título do artigo!" value="<%- article.title %>" required><br>
+          <textarea class="form-control" placeholder="Escreva seu artigo aqui!" name="body" id="article"></textarea><br>
+          <label>Categorias</label>
+          <select name="category" class="form-control">
+            <% categories.forEach((category) => { %>
+              <% if(category.id == article.categoryID) { %>
+                <option value="<%= category.id %>" selected><%= category.title %></option>
+              <% }else{ %>
+                <option value="<%= category.id %>"><%= category.title %></option>
+              <% } %>
+            <% }) %>
+          </select>
+          <br>
+          <button class="btn style-btn">Atualizar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div id="content" style="display: none;">
+   <%- article.body %>
+  </div>
+</body>
+<%- include('../../partials/footer.ejs') %>
+
+<!-- <script src="/tinymce/tinymce.min.js"></script> -->
+<script src="https://cdn.tiny.cloud/1/v7awa6jh4945dhw1v5kid86d1qayn12ee5lhkmjuynhayeke/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+
+  tinymce.init({
+    language: 'pt_BR',
+    selector: '#article',
+    activeEditor: true,
+    plugins: [
+      'a11ycheck casechange formatpainter linkchecker checklist media mediaembed pageembed permanentpen powerpaste advtable tinymcespellchecker tinycomments advlist autolink link image lists print preview hr searchreplace wordcount insertdatatime media save table paste emoticons'
+    ],
+    toolbar: 'a11ycheck addcoment showcomments casechange checklist code formatpainter pageembed permanentpen table',
+    toolbar_mode: 'floating',
+    tinycomments_mode: 'embedded',
+    tinycomments_author: 'Davi Souza',
+    init_instance_callback: () =>{
+      tinymce.get("article").setContent($("#content").html())
+    }
+  });
+
+</script>
