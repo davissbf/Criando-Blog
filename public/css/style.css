@@ -39,6 +39,20 @@ body{
   color: #b90606;
 }
 
+.style-btn4{
+  background: #084649;
+  outline: none;
+  border-color: #084649;
+  border-radius: 0;
+  transition: 0.5s;
+  color: white;
+}
+
+.style-btn4:hover{
+  background: #032c2e;
+  color: white;
+}
+
 /* 
 #263b5c #154fad #180d47 
 linha #4a4555  
