@@ -11,7 +11,7 @@ const User = connection.define('users',{
   }
 })
 
-// User.sync({force: false});
+//User.sync({force: false});
 
 /*
   Sincroniza o banco de dados pela primeira vez, criando a tabela
