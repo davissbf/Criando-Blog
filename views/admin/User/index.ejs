@@ -25,7 +25,7 @@
         <td><%= user.id %></td>
         <td><%= user.email %></td>
         <td>
-          <a href="admin/user/edit" class="btn style-btn2">Editar</a>
+          <a href="/admin/users/edit" class="btn style-btn2">Editar</a>
 
             <form class="form-delete" method="POST" action="/users/delete" style="display: inline;" onsubmit="confirmDelete(event, this)">
               <input type="hidden" name="id" value="">
