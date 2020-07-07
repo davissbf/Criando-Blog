@@ -5,7 +5,9 @@ const bcrypt = require('bcryptjs');
 
 
 router.get("/admin/users", (req, res) => {
-  res.send("Listagem de usuários!!!!");
+  User.findAll().then(users => {
+    res.render("../views/admin/User/index.ejs", {users: users});
+  });
 });
 
 router.get("/admin/users/create", (req, res) => {
@@ -52,6 +54,45 @@ router.post("/users/create", (req, res) =>{
       `)
     }
   });
+});
+
+router.post("/users/delete", (req, res) =>{
+  let id = req.body.id;
+
+  if(id !== undefined){
+    if(!isNaN(id)){
+      email.destroy({
+        where: {
+          id: id
+        }
+      }).then(()=>{
+        res.redirect("/admin/users")
+      });
+
+    }else{ // se o id não for um numero
+      res.redirect("/admin/users");
+    }
+  }else{ // NULL
+    res.regirect("/admin/users");
+  }
+});
+
+router.get("/admin/users/edit/:id", (req, res) =>{
+  let id = req.params.id;
+  console.log(id);
+
+  User.findByPk(id).then(email =>{
+    if(email !== undefined){
+      User.findAll().then(email =>{
+        res.render("admin/user/edit", {email: email});
+      });
+    }else{
+      res.redirect("/");
+    }
+  }).catch(err =>{
+    res.redirect("/");
+  });
+
 });
 
 
