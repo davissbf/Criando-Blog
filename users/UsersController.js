@@ -80,10 +80,18 @@ router.post("/users/delete", (req, res) =>{
 router.post("/users/save", (req, res) =>{
   let email = req.body.email;
   let password = req.body.password;
+  let id = req.body.id;
+  
+  let salt = bcrypt.genSaltSync(10);
+  let hash = bcrypt.hashSync(password, salt);
 
-  User.create({
+  User.update({
     email: email,
-    password: password
+    password: hash
+  }, {
+    where: {
+      id: id
+    }      
   }).then(() => {
     res.redirect("/admin/users");
   }).catch(err => console.log(err));
@@ -94,9 +102,7 @@ router.get("/admin/users/edit/:id", (req, res) =>{
 
   User.findByPk(id).then(user =>{
     if(user !== undefined){
-      User.findAll().then(users =>{
-        res.render("admin/User/edit", {users});
-      });
+        res.render("admin/User/edit", {user});
     }else{
       res.redirect("/");
     }

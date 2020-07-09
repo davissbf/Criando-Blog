@@ -10,9 +10,9 @@
     <div class="card-body">
       <p>Editar</p>
       <form action="/users/save" method="POST">
-        <input type="hidden" value="<%= users.id %>" name="id">
-        <input class="form-control" name="email" type="email" placeholder="email@gmail.com" value="<%- users.email %>"><br>
-        <input class="form-control" name="password" type="password" placeholder="******" value="<%- users.password %>"><br>
+        <input type="hidden" value="<%= user.id %>" name="id">
+        <input class="form-control" name="email" type="email" placeholder="email@gmail.com" value="<%= user.email %>"><br>
+        <input class="form-control" name="password" type="password" placeholder="******" value="<%= user.password %>"><br>
         <button type="submit" class="btn style-btn4 btn-block">Atualizar</button>     
       </form>
     </div>
