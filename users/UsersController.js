@@ -61,7 +61,7 @@ router.post("/users/delete", (req, res) =>{
 
   if(id !== undefined){
     if(!isNaN(id)){
-      email.destroy({
+      User.destroy({
         where: {
           id: id
         }
@@ -73,18 +73,29 @@ router.post("/users/delete", (req, res) =>{
       res.redirect("/admin/users");
     }
   }else{ // NULL
-    res.regirect("/admin/users");
+    res.redirect("/admin/users");
   }
+});
+
+router.post("/users/save", (req, res) =>{
+  let email = req.body.email;
+  let password = req.body.password;
+
+  User.create({
+    email: email,
+    password: password
+  }).then(() => {
+    res.redirect("/admin/users");
+  }).catch(err => console.log(err));
 });
 
 router.get("/admin/users/edit/:id", (req, res) =>{
   let id = req.params.id;
-  console.log(id);
 
-  User.findByPk(id).then(email =>{
-    if(email !== undefined){
-      User.findAll().then(email =>{
-        res.render("admin/user/edit", {email: email});
+  User.findByPk(id).then(user =>{
+    if(user !== undefined){
+      User.findAll().then(users =>{
+        res.render("admin/User/edit", {users});
       });
     }else{
       res.redirect("/");

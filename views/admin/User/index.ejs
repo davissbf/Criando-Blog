@@ -25,10 +25,10 @@
         <td><%= user.id %></td>
         <td><%= user.email %></td>
         <td>
-          <a href="/admin/users/edit" class="btn style-btn2">Editar</a>
+          <a href="/admin/users/edit/<%= user.id %>" class="btn style-btn2">Editar</a>
 
             <form class="form-delete" method="POST" action="/users/delete" style="display: inline;" onsubmit="confirmDelete(event, this)">
-              <input type="hidden" name="id" value="">
+              <input type="hidden" name="id" value="<%= user.id %>">
             
               <button class="btn style-btn3">Deletar</button>
             </form>

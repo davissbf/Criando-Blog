@@ -34,24 +34,29 @@
 </body>
 <%- include('../../partials/footer.ejs') %>
 
-<!-- <script src="/tinymce/tinymce.min.js"></script> -->
-<script src="https://cdn.tiny.cloud/1/v7awa6jh4945dhw1v5kid86d1qayn12ee5lhkmjuynhayeke/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="/tinymce/js/tinymce.min.js"></script>
+<!-- <script src="https://cdn.tiny.cloud/1/v7awa6jh4945dhw1v5kid86d1qayn12ee5lhkmjuynhayeke/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
 <script>
 
+  // tinymce.init({
+  //   language: 'pt_BR',
+  //   selector: '#article',
+  //   activeEditor: true,
+  //   plugins: [
+  //     'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatatime media save table paste emoticons'
+  //   ],
+  //   init_instance_callback: () =>{
+  //     tinymce.get("article").setContent($("#content").html())
+  //   }
+  // });
+
   tinymce.init({
-    language: 'pt_BR',
-    selector: '#article',
-    activeEditor: true,
-    plugins: [
-      'a11ycheck casechange formatpainter linkchecker checklist media mediaembed pageembed permanentpen powerpaste advtable tinymcespellchecker tinycomments advlist autolink link image lists print preview hr searchreplace wordcount insertdatatime media save table paste emoticons'
-    ],
-    toolbar: 'a11ycheck addcoment showcomments casechange checklist code formatpainter pageembed permanentpen table',
-    toolbar_mode: 'floating',
-    tinycomments_mode: 'embedded',
-    tinycomments_author: 'Davi Souza',
-    init_instance_callback: () =>{
-      tinymce.get("article").setContent($("#content").html())
-    }
-  });
+        selector: "#article",
+        plugins: [
+            'advlist advcode autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste code autosave emoticons textpattern'
+        ],
+        toolbar: 'code restoredraft emoticons hr image lists numlist bullist fullscreen',
+        themes: "modern",
+    })
 
 </script>
