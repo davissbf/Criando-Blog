@@ -112,5 +112,43 @@ router.get("/admin/users/edit/:id", (req, res) =>{
 
 });
 
+router.get("/login", (req, res) => {
+  res.render("admin/User/login");
+});
+
+router.post("/authenticate", (req, res) => {
+  let email = req.body.email;
+  let password = req.body.password;
+
+  User.findOne({where:{email: email}}).then(user => {
+    if(user != undefined){ // Se existe um usuário com este email
+      // validar senha
+      let correct = bcrypt.compareSync(password,user.password);
+      
+      if(correct){
+        req.session.user = {
+          id: user.id,
+          email: user.email
+        }
+        res.redirect("admin/articles");
+      }else{
+        res.redirect("/login");
+      }
+    }else {
+      res.redirect("/login");
+    }
+  });
+});
+
+router.get("/admin/login", (req, res) => {
+  let session = req.session.user = undefined;
+  res.render("../views/partials/navbar.ejs",{session: req.session.user})
+});
+
+router.get("/logout", (req, res) => {
+  req.session.user = undefined;
+  res.redirect("/");
+});
+
 
 module.exports = router;
